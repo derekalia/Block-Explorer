@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { connect } from 'react-redux';
 import { getBlock } from '../util/blockQuery';
 import { updateSelectedBlock, updateSelectedTrans, updateNavTitle } from '../actions';
 import { Link } from 'react-router-dom';
-import {ContentTitle, Content, BlockStyle } from './style/style'
+import { ContentTitle, Content, BlockStyle } from './style/style';
 
 class Block extends React.Component {
   componentDidMount = async () => {
@@ -17,34 +16,43 @@ class Block extends React.Component {
     }
   };
 
-  render() {
-    console.log('selectedBlock', this.props.blocks.selectedBlock);
+  render() {    
+    const {
+      number,
+      gasUsed,
+      hash,
+      parentHash,
+      size,
+      stateRoot,
+      timestamp,
+      totalDifficulty
+    } = this.props.blocks.selectedBlock;
     return (
       <Content>
         <ContentTitle>Block Data</ContentTitle>
         <BlockStyle>
-          <div>Number:</div>
-          <div>{this.props.blocks.selectedBlock.number || ''}</div>
-          <div>Gas Used:</div>
-          <div>{this.props.blocks.selectedBlock.gasUsed || ''}</div>
-          <div>Hash:</div>
-          <div>{this.props.blocks.selectedBlock.hash || ''}</div>
-          <div>Parent Hash:</div>
-          <div>{this.props.blocks.selectedBlock.parentHash || ''}</div>
-          <div>Size:</div>
-          <div>{this.props.blocks.selectedBlock.size || ''}</div>
-          <div>State Root:</div>
-          <div>{this.props.blocks.selectedBlock.stateRoot || ''}</div>
-          <div>Timestamp:</div>
-          <div>{this.props.blocks.selectedBlock.timestamp || ''}</div>
-          <div>Total Difficulty:</div>
-          <div>{this.props.blocks.selectedBlock.totalDifficulty || ''}</div>
+          Number
+          <div>{number}</div>
+          Gas Used
+          <div>{gasUsed}</div>
+          Hash
+          <div>{hash}</div>
+          Parent Hash
+          <div>{parentHash}</div>
+          Size
+          <div>{size}</div>
+          State Root
+          <div>{stateRoot}</div>
+          Timestamp
+          <div>{timestamp}</div>
+          Total Difficulty
+          <div>{totalDifficulty}</div>
         </BlockStyle>
         <ContentTitle>Transactions</ContentTitle>
         {this.props.blocks.selectedBlock.transactions &&
-          this.props.blocks.selectedBlock.transactions.map(t => {
+          this.props.blocks.selectedBlock.transactions.map((t,i) => {
             return (
-              <div>
+              <div key={i}>
                 <TransTitle
                   onClick={() => {
                     this.props.updateSelectedTrans(t);
@@ -91,9 +99,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Block);
-
-
-
 
 const TransTitle = styled(Link)`
   text-decoration: none;

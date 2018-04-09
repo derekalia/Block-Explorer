@@ -1,12 +1,4 @@
-const HDWalletProvider = require('truffle-hdwallet-provider');
-const Web3 = require('web3');
-
-const provider = new HDWalletProvider(
-  'monitor lemon garlic quiz churn reduce clip forget love sketch idle ketchup',
-  'https://rinkeby.infura.io/2RpzfS8Dgjn0Naimu4Os'
-);
-
-const web3 = new Web3(provider);
+import web3 from './web3'
 
 let getLastBlockNumber = async () => {
   let currentBlock = await web3.eth.getBlockNumber();

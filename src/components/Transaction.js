@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { updateSelectedTrans, updateNavTitle } from '../actions';
 import { getTransactionFromHash } from '../util/blockQuery';
 import { connect } from 'react-redux';
